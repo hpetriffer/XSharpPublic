@@ -269,7 +269,8 @@ namespace XSharp.LanguageService
                 _activeView = _textViews.Values.FirstOrDefault();
             }
             int newLine = e.NewPosition.BufferPosition.GetContainingLine().LineNumber;
-            if (newLine != _lastLine && _dropDownBar != null && _members.Count > 0)
+            // A changed option (Tools/Options) also rebuilds the combos when the editor gets the focus back
+            if ((newLine != _lastLine || _settings.Changed) && _dropDownBar != null && _members.Count > 0)
             {
                 SelectContainingMember(newLine);
                 _lastLine = newLine;
