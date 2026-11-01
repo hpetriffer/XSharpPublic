@@ -768,13 +768,14 @@ namespace XSharp.LanguageService
             {
                 nLine = _activeView.Caret.Position.BufferPosition.GetContainingLine().LineNumber;
             }
+            // take over changed options before loading, so the combos are built with them
+            _saveSettings();
             loadTypeCombos(nLine);
             _selectedTypeIndex = temp;
             temp = _selectedMemberIndex;
             loadMemberCombos(_selectedTypeIndex);
             _selectedMemberIndex = temp;
             _lastHashCode = _file.ContentHashCode;
-            _saveSettings();
             refreshCombos();
         }
 
